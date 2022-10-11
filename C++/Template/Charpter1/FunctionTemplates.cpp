@@ -101,6 +101,12 @@ std::common_type_t<T1, T2> Max3(T1 a, T2 b) {
     return b > a ? b : a;
 }
 
+// 默认模板参数
+template<typename T1, typename T2, typename RT = std::decay_t<decltype(true ? T1():T2())>>
+        RT Max4(T1 a, T2 b){
+            return b > a? b : a;
+        };
+
 int main()
 {
     // int i = 42;
@@ -111,7 +117,7 @@ int main()
     // std::string s1 = "mathematics";
     // std::string s2 = "math";
     // std::cout << "max(s1, s2) = " << ::max(s1, s2) << std::endl;
-    auto res = ::Max3(12, 7.2);
+    auto res = ::Max4(12, 7.2);
     std::cout << typeid(res).name() << ":" << res << std::endl;
 
     return 0;
